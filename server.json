@@ -1,7 +1,7 @@
 {
   "transactions": [
     {
-      "id": 1,
+      "id": "1",
       "description": "Desenvolvimento de site",
       "type": "income",
       "category": "Venda",
@@ -9,12 +9,68 @@
       "createdAt": "2025-03-07T14:01:39.417Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "description": "Hamburger",
       "type": "outcome",
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2025-03-07T14:00:19.417Z"
+    },
+    {
+      "id": "6e60",
+      "description": "Placa Solar",
+      "price": 1000,
+      "category": "Energia",
+      "type": "outcome",
+      "createdAt": "2025-03-07T14:00:19.417Z"
+    },
+    {
+      "id": "c4aa",
+      "description": "Desenvolimetno web",
+      "price": 2500,
+      "category": "Trabalho",
+      "type": "income",
+      "createdAt": "2025-03-07T14:00:19.417Z"
+    },
+    {
+      "id": "fc9a",
+      "description": "Suxi",
+      "price": 330,
+      "category": "Alimentação",
+      "type": "income",
+      "createdAt": "2025-03-10T13:03:23.201Z"
+    },
+    {
+      "id": "092c",
+      "description": "carro",
+      "price": 1100,
+      "category": "transporte",
+      "type": "outcome",
+      "createdAt": "2025-03-10T13:15:08.882Z"
+    },
+    {
+      "id": "940e",
+      "description": "pizza ",
+      "price": 45,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2025-03-10T13:16:01.012Z"
+    },
+    {
+      "id": "e410",
+      "description": "remedios",
+      "price": 550,
+      "category": "farmacia",
+      "type": "outcome",
+      "createdAt": "2025-03-10T13:17:30.332Z"
+    },
+    {
+      "id": "4ec0",
+      "description": "Freelas",
+      "price": 250,
+      "category": "Trabalho",
+      "type": "income",
+      "createdAt": "2025-03-10T13:18:22.369Z"
     }
   ]
 }

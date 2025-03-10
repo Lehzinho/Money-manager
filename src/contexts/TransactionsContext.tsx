@@ -1,10 +1,13 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
+import { api } from "../lib/axios";
+import { createContext } from "use-context-selector";
+
+interface newTransactionFormInputs {
+  description: string;
+  type: "income" | "outcome";
+  category: string;
+  price: number;
+}
 
 interface TransactionContextProps {
   children: ReactNode;
@@ -21,25 +24,43 @@ interface Transaction {
 
 interface TransactionContextType {
   transactions: Transaction[];
+  fetchTransactions: (query?: string) => Promise<void>;
+  createTransactions: (transactions: newTransactionFormInputs) => Promise<void>;
 }
-const TransactionContext = createContext({} as TransactionContextType);
+export const TransactionContext = createContext({} as TransactionContextType);
 
 export const TransactionsProvicer = ({ children }: TransactionContextProps) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const loadTransactions = async () => {
-    const response = await fetch("http://localhost:3333/transactions");
-    const data = await response.json();
-    console.log(data);
-    setTransactions(data);
-  };
-  useEffect(() => {
-    loadTransactions();
+
+  const fetchTransactions = useCallback(async (query?: string) => {
+    const response = await api.get("/transactions", {
+      params: {
+        q: query,
+      },
+    });
+    setTransactions(response.data);
   }, []);
+
+  const createTransactions = useCallback(
+    async (transactions: newTransactionFormInputs) => {
+      const { data } = await api.post("/transactions", {
+        ...transactions,
+        createdAt: new Date().toISOString(),
+      });
+
+      setTransactions((prev) => [...prev, data]);
+    },
+    []
+  );
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
   return (
-    <TransactionContext.Provider value={{ transactions }}>
+    <TransactionContext.Provider
+      value={{ transactions, fetchTransactions, createTransactions }}
+    >
       {children}
     </TransactionContext.Provider>
   );
 };
-
-export const useTransactions = () => useContext(TransactionContext);
